@@ -7,8 +7,14 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 5000;
 
-// Middleware
-app.use(cors()); // Adjust this if you're hosting frontend separately
+// CORS configuration
+const corsOptions = {
+  origin: ['http://localhost:3000', 'https://section-ai.vercel.app'], // Frontend URLs
+  optionsSuccessStatus: 200,
+};
+
+// Apply CORS middleware
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Initialize LangChain Model
@@ -47,15 +53,6 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
   });
 }
-
-// Allow requests from specific origins
-const corsOptions = {
-  origin: ['http://localhost:3000', 'https://section-ai.vercel.app'], // Add your frontend URLs
-  optionsSuccessStatus: 200,
-};
-
-// Use the configured CORS middleware
-app.use(cors(corsOptions));
 
 // Start the server
 app.listen(port, () => {
