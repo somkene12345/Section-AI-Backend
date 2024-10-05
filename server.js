@@ -7,6 +7,19 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 5000;
 
+// Serve static files from the React frontend app
+app.use(express.static(path.join(__dirname, 'build')));
+
+// Anything that doesn't match the API routes should render the frontend
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
 // CORS configuration
 const corsOptions = {
   origin: ['http://localhost:3000', 'https://section-ai.vercel.app'], // Frontend URLs
