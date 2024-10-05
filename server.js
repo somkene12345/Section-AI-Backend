@@ -48,11 +48,10 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+// Allow requests from specific origins
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://section-ai.vercel.app'], // Allow your frontend domains
-  methods: 'GET,POST', // Methods you want to allow
-  allowedHeaders: 'Content-Type', // Headers you want to allow
-  credentials: true, // Set to true if your frontend needs cookies or credentials from the backend
+  origin: ['http://localhost:3000', 'https://section-ai.vercel.app'], // Add your frontend URLs
+  optionsSuccessStatus: 200,
 };
 
 // Use the configured CORS middleware
