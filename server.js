@@ -23,7 +23,7 @@ app.listen(PORT, () => {
 
 // CORS configuration
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://section-ai.vercel.app'], // Frontend URLs
+  origin: ['http://localhost:3000', 'https://section-ai.vercel.app, https://section-ai-backend.vercel.app'], // Frontend URLs
   optionsSuccessStatus: 200,
 };
 
