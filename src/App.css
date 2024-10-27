@@ -1,0 +1,169 @@
+/* App.css */
+
+html, body {
+  height: 100%; /* Full viewport height for proper container sizing */
+  margin: 0;
+}
+
+header{
+  display:flex;
+  align-items: center; /* Align items vertically */
+  justify-content: center; /* Center items horizontally */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  position: fixed;
+width:auto;
+height: 50px;
+border-radius: 100px;
+margin-left: 10%;
+margin-right: 10%;
+margin-top: 15px;
+background-image: linear-gradient(to bottom right, #ffdede, rgb(193, 193, 255));
+border-left: 1px solid #ff0000;
+  border-top: 1px solid #ff0000;
+  border-right: 1px solid #0000ff;
+  border-bottom: 1px solid #0000ff;
+}
+.chat-message div{
+display: block;
+width:fit-content;
+align-items:baseline;
+justify-self: auto;
+text-align: center;
+word-wrap:break-word;
+height: auto;
+border-radius:100px;
+background-color: #fafafa;
+border-left: 1px solid #ff0000;
+  border-top: 1px solid #ff0000;
+  border-right: 1px solid #0000ff;
+  border-bottom: 1px solid #0000ff;
+  font-size: 20px;
+padding-left: 35px;
+padding-right: 35px;
+padding-top:5px;
+padding-bottom:5px;
+}
+
+.logo {
+  width: 30px; /* Adjust the size as needed */
+  height: auto;
+  vertical-align: middle;/* Aligns the logo with the text */
+}
+
+.chat-message {
+  margin-bottom: 10px; /* Add spacing between messages */
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: auto; /* Full viewport height */
+  overflow: hidden; /* Prevents scrolling issues if content overflows */
+}
+
+.chat-history {
+  flex:auto; /* Grow to fill the available space */
+  overflow-y:auto; /* Scrollable if content overflows */
+  margin: 10px;
+  margin-bottom: 50px;
+  box-sizing: border-box;
+}
+
+.chat-message > div:not(.chat-history .dv4cm) {
+  display: block;
+  }
+
+.form-container {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%); /* Center horizontally */
+  width: 100%;
+  margin-bottom: 20px;
+  max-width: 800px; /* Set a max-width to prevent stretching */
+  background-color: #e0e0e0; /* Background color for better visibility */
+  border-top: 1px solid #ddd;
+  border-radius: 100px;
+  z-index: 1000; /* Ensure it’s above other content */
+}
+
+.input-form {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  gap: 10px;
+  justify-content: center; /* Center items horizontally */
+  width: 100%;
+  margin-left: 7.5%;
+  margin-right: 7.5%;
+  overflow-y: auto;
+}
+
+.input-form input[type="text"] {
+  padding: 5px;
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  height: 35px; /* Adjust height to align better with buttons */
+  width: 100%;
+  max-width: 500px; /* Set a max-width to prevent stretching */
+  background-image: linear-gradient(to bottom right, #ffdede, rgb(193, 193, 255));
+  border-radius: 15px;
+  border-left: 1px solid #ff0000;
+  border-top: 1px solid #ff0000;
+  border-right: 1px solid #0000ff;
+  border-bottom: 1px solid #0000ff;
+}
+
+.input-form button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  height: 35px;
+  background-image: linear-gradient(to bottom right, #ffdede, rgb(193, 193, 255));
+  border-radius: 1000px;
+  border-left: 1px solid #ff0000;
+  border-top: 1px solid #ff0000;
+  border-right: 1px solid #0000ff;
+  border-bottom: 1px solid #0000ff;
+  cursor: pointer;
+}
+
+.input-form button:hover {
+  border-left: 1px solid #0000ff;
+  border-top: 1px solid #0000ff;
+  border-right: 1px solid #ff0000;
+  border-bottom: 1px solid #ff0000;
+}
+
+/* Styling for the custom upload button */
+/*.upload-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+.upload-button:hover {
+  border-left: 1px solid #0000ff;
+  border-top: 1px solid #0000ff;
+  border-right: 1px solid #ff0000;
+  border-bottom: 1px solid #ff0000;
+}*/
+
+/* Styling for the image preview */
+/*.image-preview {
+  margin-bottom: 20px;
+}
+
+.image-preview img {
+  max-width: 100px;
+  height: auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+*/
