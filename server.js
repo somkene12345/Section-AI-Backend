@@ -1,80 +1,56 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const multer = require('multer');
-const { ChatGoogleGenerativeAI } = require('@langchain/google-genai');
 const path = require('path');
+const { ChatGoogleGenerativeAI } = require('@langchain/google-genai');
 
+// Initialize Express app
 const app = express();
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
-// Use CORS middleware
-app.use(cors());
+// Middleware
+app.use(cors({
+  origin: ['http://localhost:3000', 'https://section-ai.vercel.app'],
+  optionsSuccessStatus: 200,
+}));
 app.use(express.json());
 
-// Configure multer for file uploads
-const upload = multer({
-  storage: multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, 'uploads/');
-    },
-    filename: (req, file, cb) => {
-      cb(null, Date.now() + path.extname(file.originalname));
-    },
-  }),
-});
+// Serve static files from the React frontend app
+app.use(express.static(path.join(__dirname, 'build')));
 
-// Create the uploads directory if it doesn't exist
-const fs = require('fs');
-if (!fs.existsSync('uploads')) {
-  fs.mkdirSync('uploads');
-}
-
+// Initialize LangChain model
 const model = new ChatGoogleGenerativeAI({
   modelName: 'gemini-1.5-flash',
   maxOutputTokens: 2048,
 });
 
+// API route for chatbot
 app.post('/api/chat', async (req, res) => {
   const { messages } = req.body;
 
   try {
     console.log('Received request with messages:', messages);
 
-    // Directly use LangChain's model invocation
     const response = await model.invoke(messages);
     console.log('Response from LangChain:', response);
 
-    res.json({ reply: response.content });
+    if (response && response.content) {
+      res.json({ reply: response.content });
+    } else {
+      res.status(500).json({ error: 'No valid response from the model.' });
+    }
   } catch (error) {
     console.error('Error occurred:', error);
     res.status(500).json({ error: 'An error occurred while processing your request.' });
   }
 });
 
-// Route for handling image uploads
-app.post('/api/upload', upload.single('file'), async (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ error: 'No file uploaded' });
-  }
-
-  const filePath = req.file.path;
-  console.log('Received file:', filePath);
-
-  try {
-    // Implement image processing or detection here
-    // For example, you might send the image to an image analysis API or use a library
-    
-    // Example (pseudo-code, replace with actual processing):
-    // const imageAnalysisResult = await analyzeImage(filePath);
-
-    res.json({ message: 'Image uploaded successfully', filePath });
-  } catch (error) {
-    console.error('Error processing image:', error);
-    res.status(500).json({ error: 'An error occurred while processing the image.' });
-  }
+// Catch-all route to serve React frontend for any non-API routes
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
 });
 
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
